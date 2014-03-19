@@ -2,8 +2,8 @@ module Spree
   class PollAnswer < ActiveRecord::Base
     belongs_to :poll
     has_many :poll_votes, dependent: :destroy
-#    attr_accessible :answer
-
+    has_one :image, as: :viewable, class_name: "Spree::Image"
+    accepts_nested_attributes_for :image
     #validates :answer, presence: true
     before_destroy :ensure_enclosing_poll_still_has_at_least_two_answers
 

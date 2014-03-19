@@ -16,7 +16,7 @@ module Spree
 
       private
         def build_answers
-          2.times { @poll.poll_answers.build }
+          2.times { @poll.build_answer_with_image }
         end
 
         def collection
@@ -34,7 +34,7 @@ module Spree
         end
 
         def permitted_resource_params
-          params.require(:poll).permit(:name, :question, :allow_view_results_without_voting, poll_answers_attributes: [:answer])
+          params.require(:poll).permit(:name, :question, :allow_view_results_without_voting, poll_answers_attributes: [:answer, image_attributes: [:attachment]])
         end
     end
   end

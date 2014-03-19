@@ -9,6 +9,12 @@ module Spree
     has_many :poll_answers, dependent: :destroy
     accepts_nested_attributes_for :poll_answers, allow_destroy: true
 
+    def build_answer_with_image
+      answer = poll_answers.build
+      answer.build_image
+      answer
+    end
+
     class << self
       def current
         all.shuffle.first

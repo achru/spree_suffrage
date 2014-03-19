@@ -1,5 +1,10 @@
 <tr class="<%= cycle('odd', 'even')%>">
-  <td><%= f.text_field :answer %>
+  <td><%= f.text_field :answer %></td>
+  <td><%= f.fields_for :image do |image| %>
+        <%= f.file_field :attachment %>
+      <% end %>
+  </td>
+  <td>
     <%= f.hidden_field :_destroy %>
     <%= link_to "remove", '#', class: "remove_nested_fields" %>
   </td>
