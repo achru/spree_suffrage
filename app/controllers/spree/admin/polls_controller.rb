@@ -16,7 +16,7 @@ module Spree
 
       private
         def build_answers
-          2.times { @poll.answers.build }
+          2.times { @poll.poll_answers.build }
         end
 
         def collection

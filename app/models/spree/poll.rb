@@ -9,8 +9,6 @@ module Spree
     has_many :poll_answers, dependent: :destroy
     accepts_nested_attributes_for :poll_answers, allow_destroy: true
 
-    before_validation :create_default_poll_answers, :on => :create
-
     class << self
       def current
         all.shuffle.first
@@ -22,11 +20,5 @@ module Spree
         sum + answer.poll_votes.count
       } > 0
     end
-
-    private
-      def create_default_poll_answers
-        poll_answers.build(answer: 'Yes')
-        poll_answers.build(answer: 'No')
-      end
   end
 end
