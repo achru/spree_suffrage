@@ -1,6 +1,6 @@
 module Spree
   class Poll < ActiveRecord::Base
-    attr_accessible :name, :question, :poll_answers_attributes, :allow_view_results_without_voting
+#    attr_accessible :name, :question, :poll_answers_attributes, :allow_view_results_without_voting
 
     validates :name, uniqueness: true
     validates :name, :question, presence: true
