@@ -25,7 +25,7 @@
     <% @poll_answers.each do |answer| %>
       <tr class="align-center">
         <% if answer.image.try(:attachment) %>
-          <td><%= image_tag answer.image.attachment.mini.url %></td>
+          <td><%= image_tag answer.image.mini_url %></td>
         <% else %>
           <td></td>
         <% end %>
