@@ -34,7 +34,7 @@ module Spree
         end
 
         def permitted_resource_params
-          params.require(:poll).permit(:name, :question, :allow_view_results_without_voting, poll_answers_attributes: [:answer, image_attributes: [:attachment]])
+          params.require(:poll).permit(:name, :question, :allow_view_results_without_voting, poll_answers_attributes: [:answer, :_destroy, image_attributes: [:attachment]])
         end
     end
   end
