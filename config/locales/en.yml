@@ -2,6 +2,7 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  polls: "Polls"
   thanks_for_voting: "Thanks for voting!"
   question: "Question"
   problem_voting: "Sorry, there was a problem registering your vote.  Have you already voted in this poll?"

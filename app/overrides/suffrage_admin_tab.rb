@@ -1,4 +1,5 @@
 Deface::Override.new(:virtual_path => "spree/admin/shared/_menu",
                      :name => "suffrage_admin_tab",
-                     :insert_bottom => "[data-hook='admin_tabs']",
-                     :text => "<%= tab(:polls, :icon => 'icon-question-sign') %>")
+                     :insert_bottom => "[data-hook='admin_configurations_sidebar_menu']",
+                     :text => "<%= configurations_sidebar_menu_item Spree.t(:polls), admin_polls_path %>"
+                    )
