@@ -16,6 +16,7 @@
   </colgroup>
   <thead>
     <tr>
+      <th><%= t(:image) %></th>
       <th><%= t(:answer) %></th>
       <th><%= t(:tally) %></th>
     </tr>
@@ -23,6 +24,11 @@
   <tbody>
     <% @poll_answers.each do |answer| %>
       <tr class="align-center">
+        <% if answer.image.try(:attachment) %>
+          <td><%= image_tag answer.image.attachment.thumb.url %></td>
+        <% else %>
+          <td></td>
+        <% end %>
         <td><%= answer.answer %></td>
         <td><%= answer.tally %></td>
       </tr>
