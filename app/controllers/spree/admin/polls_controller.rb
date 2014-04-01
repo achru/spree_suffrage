@@ -1,8 +1,7 @@
 module Spree
   module Admin
     class PollsController < ResourceController
-
-      before_filter :build_answers, only: :new 
+      before_filter :build_answers, only: [:edit, :new]
 
       def index
         session[:return_to] = request.url
@@ -16,7 +15,9 @@ module Spree
 
       private
         def build_answers
-          2.times { @poll.build_answer_with_image }
+          while @poll.poll_answers.size < 2 do
+            @poll.build_answer_with_image
+          end
         end
 
         def collection
@@ -26,7 +27,6 @@ module Spree
           params[:q][:s] ||= "name asc"
 
           @search = super.ransack(params[:q])
-
           @collection = @search.result.
             page(params[:page]).
             per(Spree::Suffrage::Config[:admin_polls_per_page])
@@ -34,7 +34,7 @@ module Spree
         end
 
         def permitted_resource_params
-          params.require(:poll).permit(:name, :question, :allow_view_results_without_voting, poll_answers_attributes: [:answer, :_destroy, image_attributes: [:attachment]])
+          params.require(:poll).permit(:name, :question, :allow_view_results_without_voting, poll_answers_attributes: [:id, :answer, :_destroy, image_attributes: [:id, :attachment]])
         end
     end
   end

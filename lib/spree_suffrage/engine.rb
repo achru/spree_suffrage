@@ -11,7 +11,7 @@ module SpreeSuffrage
       g.test_framework :rspec
     end
 
-    initializer "spree.suffrage.environment", :before => :load_config_initializers do |app|
+    initializer "spree.suffrage.environment" do |app|
       Spree::Suffrage::Config = Spree::SuffrageConfiguration.new
     end
 
