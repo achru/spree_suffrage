@@ -1,7 +1,7 @@
 <tr class="<%= cycle('odd', 'even')%>">
   <td><%= f.text_field :answer %></td>
   <td>
-    <%= f.fields_for :image do |image| %>
+    <%= f.fields_for :image, f.object.image_for_form do |image| %>
       <%= image.file_field :attachment %><br/>
       <%= image_tag image.object.mini_url if image.object.attachment.present? %>
     <% end %>

@@ -11,6 +11,10 @@ module Spree
       poll_votes.count
     end
 
+    def image_for_form
+      self.image || self.build_image
+    end
+
     private
       def ensure_poll_answers_count
         return false if poll.poll_answers.count <= 2 # the count does not yet reflect this deletion

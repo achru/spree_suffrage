@@ -16,7 +16,7 @@ module Spree
       private
         def build_answers
           while @poll.poll_answers.size < 2 do
-            @poll.build_answer_with_image
+            @poll.poll_answers.build
           end
         end
 
