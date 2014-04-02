@@ -3,7 +3,7 @@ module Spree
     def vote
       @vote = PollVote.new
       @vote.poll_answer_id = params[:poll_answer_id]
-      @vote.user_id = current_user.try(:id)
+      @vote.user_id = spree_current_user.try(:id)
       @vote.ip_address = request.remote_ip
 
       if @vote.save
@@ -12,7 +12,7 @@ module Spree
       else
         flash[:error] = I18n.t(:problem_voting)
       end
-      redirect_to(:back) 
+      redirect_to(:back)
     end
   end
 end
