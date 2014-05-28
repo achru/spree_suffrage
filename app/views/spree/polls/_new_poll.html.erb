@@ -9,7 +9,7 @@
           <li>
             <%= radio_button_tag :poll_answer_id, answer.id %>
             <%= label_tag answer.answer%>
-            <%= image_tag answer.image.attachment.url if answer.image.attachment.present? %>
+            <%= image_tag answer.image.attachment.url if answer.image.present? %>
           </li>
         <% end %>
         <%= submit_tag t(:vote) %>
