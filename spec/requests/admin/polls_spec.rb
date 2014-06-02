@@ -34,7 +34,7 @@ describe "Polls" do
           @poll = create(:poll, :name => 'am i smart')
         end
 
-        pending 'should allow you to delete', js: true do
+        it 'should allow you to delete', js: true do
 
           click_link "Polls"
           page.find(".delete-resource").click
@@ -123,17 +123,17 @@ describe "Polls" do
           visit spree.admin_poll_path(poll)
         end
 
-        pending 'should allow you to add an answer', js: true do
+        it 'should allow you to add an answer', js: true do
           visit spree.admin_poll_path(poll)
           click_link ".add_nested_fields"
           fill_in "poll_answer_answer", :with => "green"
         end
 
-        pending 'should allow you to remove an answer' do
+        it 'should allow you to remove an answer' do
           visit spree.admin_poll_path(poll)
           click_button "Update"
         end
-        pending 'should allow you to edit an answer' do
+        it 'should allow you to edit an answer' do
           visit spree.admin_poll_path(poll)
           click_button "Update"
         end
