@@ -4,17 +4,17 @@ require 'support/shared_contexts/check_voting_allowed'
 describe "Polls" do
   include_context "check_voting_allowed"
   let!(:product) { # force the sidbare to be loaded
-    product = create(:product) 
+    product = create(:product)
     product.taxons << create(:taxon)
-  } 
-  let!(:poll) { create(:poll, :name => 'am i handsome', :allow_view_results_without_voting => false) }
+  }
+  let!(:poll) { create(:poll, :allow_view_results_without_voting => false) }
   let(:user) { create(:user) }
 
   before(:each) do
     Spree::PollVote.all.map(&:destroy)
-    Deface::Override.new(name: 'add_poll_to_home_page', 
-                         virtual_path: 'spree/shared/_sidebar', 
-                         insert_top: '#sidebar[data-hook],[data-hook=sidebar]', 
+    Deface::Override.new(name: 'add_poll_to_home_page',
+                         virtual_path: 'spree/shared/_sidebar',
+                         insert_top: '#sidebar[data-hook],[data-hook=sidebar]',
                          partial: 'spree/polls/poll')
     visit spree.root_path
   end
@@ -22,7 +22,7 @@ describe "Polls" do
   context "not voted in this poll" do
     context "as a logged in user" do
       # can't get sign_in method for some reason
-      pending "should allow me to vote" do
+      it "should allow me to vote" do
         sign_in user
 
         check_voting_allowed
@@ -42,9 +42,9 @@ describe "Polls" do
 
         it "should not show the 'view results' link if there hasn't been any voting yet" do
           visit spree.root_path
-          
+
           page.should_not have_link(I18n.t(:view_poll_results))
-        end        
+        end
 
         it "should allow me to see the results" do
           vote = Spree::PollVote.new
@@ -69,7 +69,7 @@ describe "Polls" do
   context "already voted in this poll" do
     context "logged in user" do
       # can't get sign_in method for some reason
-      pending "should show me the poll results" do
+      it "should show me the poll results" do
         sign_in user
 
         page.should have_selector("#poll_results_list")
