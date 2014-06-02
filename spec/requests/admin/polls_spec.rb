@@ -128,7 +128,7 @@ describe "Polls" do
           click_link ".add_nested_fields"
           fill_in "poll_answer_answer", :with => "green"
         end
-        
+
         pending 'should allow you to remove an answer' do
           visit spree.admin_poll_path(poll)
           click_button "Update"

@@ -22,7 +22,7 @@ module Spree
     end
 
     def has_results?
-      poll_answers.inject(0) { |sum, answer| 
+      poll_answers.inject(0) { |sum, answer|
         sum + answer.poll_votes.count
       } > 0
     end
