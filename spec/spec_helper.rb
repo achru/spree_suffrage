@@ -11,9 +11,9 @@ require 'ffaker'
 Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }
 
 # Requires factories defined in spree_core
+require 'spree/testing_support/authorization_helpers'
 require 'spree/testing_support/factories'
 require 'spree/testing_support/controller_requests'
-require 'spree/testing_support/authorization_helpers'
 require 'spree/testing_support/url_helpers'
 require 'spree/testing_support/capybara_ext'
 
@@ -58,28 +58,25 @@ RSpec.configure do |config|
   # order dependency and want to debug it, you can fix the order by providing
   # the seed, which is printed after each run.
   #     --seed 1234
-  config.order = "random"  
-  
+  config.order = "random"
+
   config.include FactoryGirl::Syntax::Methods
   config.include Spree::TestingSupport::UrlHelpers
   config.include Spree::TestingSupport::ControllerRequests, :type => :controller
   config.include Devise::TestHelpers, :type => [:controller, :requests] # this doesn't give me sign_in, and not sure why
   config.include Rack::Test::Methods, :type => :requests
-
-  config.before(:each) do
-    Spree::Dash::Config.stub(configured?: true)
-  end
+  config.extend Spree::TestingSupport::AuthorizationHelpers::Controller
 end
 
 class ActiveRecord::Base
   mattr_accessor :shared_connection
   @@shared_connection = nil
- 
+
   def self.connection
     @@shared_connection || retrieve_connection
   end
 end
- 
+
 # Forces all threads to share the same connection. This works on
 # Capybara because it starts the web server in a thread.
 ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
