@@ -16,6 +16,9 @@ require 'spree/testing_support/factories'
 require 'spree/testing_support/controller_requests'
 require 'spree/testing_support/url_helpers'
 require 'spree/testing_support/capybara_ext'
+require 'capybara/poltergeist'
+
+Capybara.javascript_driver = :poltergeist
 
 Dir["#{File.dirname(__FILE__)}/factories/**"].each do |f|
   require File.expand_path(f)
@@ -63,8 +66,8 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include Spree::TestingSupport::UrlHelpers
   config.include Spree::TestingSupport::ControllerRequests, :type => :controller
-  config.include Devise::TestHelpers, :type => [:controller, :requests] # this doesn't give me sign_in, and not sure why
-  config.include Rack::Test::Methods, :type => :requests
+  config.include Devise::TestHelpers, :type => [:controller, :features] # this doesn't give me sign_in, and not sure why
+  config.include Rack::Test::Methods, :type => :features
   config.extend Spree::TestingSupport::AuthorizationHelpers::Controller
 end
 
