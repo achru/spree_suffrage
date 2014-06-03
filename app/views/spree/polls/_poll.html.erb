@@ -8,6 +8,7 @@
 %>
 
 <% @poll = Spree::PollVote.find_by(id: session[:vote_id]).try(:poll) || Spree::Poll.find_by(id: session[:show_poll_results_without_voting_id]) %>
+
 <% if @poll %>
   <%= render poll_results_path, poll: @poll %>
 <% else %>
