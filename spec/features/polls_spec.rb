@@ -16,7 +16,7 @@ describe "Polls" do
   before(:each) do
     Spree::User.destroy_all
     Spree::Poll.destroy_all
-    # Spree::PollVote.destroy_all
+
     @poll = create(:poll, :allow_view_results_without_voting => false)
     @user = create(:user)
     visit spree.root_path
