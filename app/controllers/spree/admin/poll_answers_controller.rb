@@ -7,7 +7,7 @@ module Spree
 
       def collection
         @poll = Poll.find params[:id]
-        @collection = @poll.poll_answers 
+        @collection = @poll.poll_answers
       end
     end
   end

@@ -1,5 +1,5 @@
 <div data-hook="admin_poll_form_fields">
-  
+
     <%= f.field_container :name do %>
       <%= f.label :name, raw(t(:name) + content_tag(:span, ' *', :class => 'required')) %>
       <%= f.text_field :name, :class => 'fullwidth title' %>
@@ -31,8 +31,8 @@
     <%= f.fields_for :poll_answers do |builder| %>
       <%= render 'poll_answer_fields', f: builder %>
     <% end %>
-  </tbody>
-  <tbody id="new_poll_answers">
-    <%= link_to_add_nested_fields "Add Answer", f, :poll_answers %>
+    <div id="new_poll_answers">
+      <%= link_to_add_nested_fields "Add Answer", f, :poll_answers %>
+    </div>
   </tbody>
 </table>
