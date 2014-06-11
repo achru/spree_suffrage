@@ -15,6 +15,15 @@ module Spree
       self.image || self.build_image
     end
 
+    def vote_list_name
+      if answer.empty?
+        return image.attachment_file_name unless image.nil?
+        'empty answer'
+      else
+        answer
+      end
+    end
+
     private
       def ensure_poll_answers_count
         return false if poll.poll_answers.count <= 2 # the count does not yet reflect this deletion
