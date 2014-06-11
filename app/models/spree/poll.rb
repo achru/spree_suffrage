@@ -15,16 +15,14 @@ module Spree
       answer
     end
 
-    class << self
-      def current
-        all.shuffle.first
-      end
-    end
-
     def has_results?
       poll_answers.inject(0) { |sum, answer|
         sum + answer.poll_votes.count
       } > 0
+    end
+
+    def self.current
+        all.shuffle.first
     end
   end
 end
