@@ -31,5 +31,9 @@ module Spree
         sum + answer.poll_votes.count
       } > 0
     end
+
+    def self.current
+        all.shuffle.first
+    end
   end
 end

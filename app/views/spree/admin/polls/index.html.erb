@@ -15,16 +15,18 @@
 <% if @collection.any? %>
   <table class="index" id="listing_polls">
     <colgroup>
-       <col style="width: 35%;">
-       <col style="width: 35%;">
-       <col style="width: 15%;">
-       <col style="width: 15%;">
+       <col style="width: 25%;">
+       <col style="width: 25%;">
+       <col style="width: 5%;">
+       <col style="width: 25%;">
+       <col style="width: 20%;">
     </colgroup>
     <thead>
       <tr data-hook="admin_polls_index_headers">
         <th><%= sort_link @search,:name, t(:name), { :default_order => "desc" }, {:title => 'admin_polls_listing_name_title'} %></th>
         <th><%= t(:question) %></th>
         <th><%= t(:allow_view_results_without_voting) %></th>
+        <th>Votes</th>
         <th data-hook="admin_polls_index_header_actions" class="actions"></th>
       </tr>
     </thead>
@@ -34,7 +36,11 @@
             <td class="align-center"><%= link_to poll.name, admin_poll_answers_path(poll) %></td>
             <td class="align-center"><%= poll.question rescue '' %></td>
             <td class="align-center"><%= check_box_tag '', 1, poll.allow_view_results_without_voting, disabled: true %></td>
-
+            <td class="poll_votes_row">
+              <% answers = poll.poll_answers.map { |answer| { name: answer.vote_list_name, tally: answer.tally  } } %>
+              <div><%= "#{answers[0][:name]}: #{answers[0][:tally]}" %></div>
+              <div><%= "#{answers[1][:name]}: #{answers[1][:tally]}" %></div>
+            </td>
             <td class="actions" data-hook="admin_polls_index_row_actions">
               <%= link_to_edit poll, :no_text => true, :class => 'edit'%>
               &nbsp;

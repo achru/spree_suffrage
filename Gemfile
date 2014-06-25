@@ -1,17 +1,18 @@
 source 'http://rubygems.org'
 
-gem 'spree', github: 'spree/spree'
+gem 'spree', github: 'spree/spree', branch: '2-1-stable'
 
 # Provides basic authentication functionality for testing parts of your engine
-gem 'spree_auth_devise', :git => "git://github.com/spree/spree_auth_devise"
+gem 'spree_auth_devise', :git => "git://github.com/spree/spree_auth_devise", branch: '2-1-stable'
+gem 'zip-zip'
 
 gemspec
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails', '~> 4.0.3'
+  gem 'coffee-rails', '~> 4.0.1'
 end
 
 group :test do
@@ -21,10 +22,10 @@ group :test do
   gem 'ffaker'
 #  gem 'shoulda-matchers', '~> 1.0.0'
 #  gem 'capybara', '1.1.3'
-  gem 'selenium-webdriver', '2.30.0'
   gem 'database_cleaner', '0.7.1'
   gem 'launchy'
   gem 'pry'
+  gem 'poltergeist', '1.5.0'
  # gem 'webmock', '1.8.11'
 #  gem 'email_spec', '1.4.0'
 end

@@ -5,19 +5,21 @@ module Spree
     delegate :poll, to: :poll_answer
 
     validates :poll_answer_id, :ip_address, presence: true
-
-    # disallow multiple votes from same person/ip per poll (via poll_answer)
     validate :one_vote_per_person
 
-    private
-      def one_vote_per_person
-        arel = PollVote.arel_table
-
-        if PollVote.where(poll_answer_id: poll_answer_id).
-                    where(arel[:user_id].eq(user_id).
-                          or(arel[:ip_address].eq(ip_address))).exists?
-          errors.add(:base, "can't vote more than once")
-        end
+    def self.with_user_or_ip(user_id, ip_address)
+      if user_id.nil?
+        where(ip_address: ip_address)
+      else
+        where(user_id: user_id)
       end
+    end
+
+  private
+    def one_vote_per_person
+      if PollVote.where(poll_answer_id: poll_answer_id).with_user_or_ip(user_id, ip_address).exists?
+        errors.add(:base, "can't vote more than once")
+      end
+    end
   end
 end
