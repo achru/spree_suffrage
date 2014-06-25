@@ -7,12 +7,17 @@ module Spree
     validates :poll_answers, length: { :minimum => 2}
 
     has_many :poll_answers, dependent: :destroy
+    has_many :poll_votes, through: :poll_answers
     accepts_nested_attributes_for :poll_answers, allow_destroy: true
 
     def build_answer_with_image
       answer = poll_answers.build
       answer.build_image
       answer
+    end
+
+    def already_voted?(user)
+      poll_votes.exists?(user_id: user.id)
     end
 
     class << self
@@ -22,7 +27,7 @@ module Spree
     end
 
     def has_results?
-      poll_answers.inject(0) { |sum, answer| 
+      poll_answers.inject(0) { |sum, answer|
         sum + answer.poll_votes.count
       } > 0
     end
